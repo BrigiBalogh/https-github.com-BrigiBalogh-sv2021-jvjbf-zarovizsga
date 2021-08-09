@@ -39,13 +39,23 @@ public class TeamService {
 
     @Transactional
     public TeamDTO addNewPlayerToTeam(Long id, CreatePlayerCommand command) {
-        Team team = findById(id);
-        Player player = playerRepository.save(new Player(command.getName(), command.getBirthDate(), command.getPosition()));
+        Team team = teamRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Cannot find team"));
+        Player player = new Player(command.getName(), command.getBirthDate(), command.getPosition());
         team.addNewPlayer(player);
         return mapper.map(team, TeamDTO.class);
     }
 
 
-
+    public TeamDTO addExistingPlayerToTeam(UpdateWithExistingPlayerCommand command, Long id) {
+        Team team = teamRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Cannot find team"));
+        Player player = playerRepository.findById(command.getId()).orElseThrow(() -> new IllegalArgumentException("Cannot find player"));
+        List<Player> players = team.getPlayers();
+        long count = players.stream().filter(player1 -> player1.getPosition() == player.getPosition()).count();
+        if (count < 2 && player.getTeam() == null){
+            team.addNewPlayer(player);
+        }
+        teamRepository.save(team);
+        return mapper.map(team, TeamDTO.class);
+    }
 
 }
