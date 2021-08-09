@@ -27,7 +27,9 @@ public class Team {
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     private Set<Player> players ;
 
-
+    public Team(String name) {
+        this.name = name;
+    }
 
     public void addNewPlayer(Player player) {
         player.setTeam(this);
