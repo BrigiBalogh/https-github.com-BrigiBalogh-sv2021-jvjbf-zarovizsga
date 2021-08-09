@@ -8,6 +8,7 @@ import org.training360.finalexam.players.Player;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -25,7 +26,7 @@ public class Team {
     private String name;
 
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
-    private Set<Player> players ;
+    private List<Player> players ;
 
     public Team(String name) {
         this.name = name;
@@ -34,7 +35,7 @@ public class Team {
     public void addNewPlayer(Player player) {
         player.setTeam(this);
         if (players == null) {
-            players = new HashSet<>();
+            players = new ArrayList<>();
         }
         players.add(player);
     }
