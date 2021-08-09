@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.training360.finalexam.players.CreatePlayerCommand;
 import org.training360.finalexam.players.Player;
 import org.training360.finalexam.players.PlayerRepository;
-import org.training360.finalexam.players.UpdateWithExistingPlayerCommand;
 
 import java.lang.reflect.Type;
 import java.util.List;

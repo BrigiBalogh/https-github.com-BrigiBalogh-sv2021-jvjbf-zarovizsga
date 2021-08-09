@@ -31,6 +31,10 @@ public class Player {
      @ManyToOne
      private Team team;
 
+     public Player(String name) {
+          this.name = name;
+     }
+
      public Player(String name, LocalDate birthDate, PositionType position) {
           this.name = name;
           this.birthDate = birthDate;

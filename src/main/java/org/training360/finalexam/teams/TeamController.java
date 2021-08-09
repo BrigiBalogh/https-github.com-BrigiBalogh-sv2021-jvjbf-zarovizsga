@@ -3,7 +3,6 @@ package org.training360.finalexam.teams;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.training360.finalexam.players.CreatePlayerCommand;
-import org.training360.finalexam.players.UpdateWithExistingPlayerCommand;
 
 import javax.validation.Valid;
 import java.util.List;
