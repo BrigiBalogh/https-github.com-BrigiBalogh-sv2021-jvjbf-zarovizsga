@@ -31,11 +31,11 @@ public class Team {
     }
 
     public void addNewPlayer(Player player) {
-        player.setTeam(this);
         if (players == null) {
             players = new ArrayList<>();
         }
         players.add(player);
+        player.setTeam(this);
     }
 
 

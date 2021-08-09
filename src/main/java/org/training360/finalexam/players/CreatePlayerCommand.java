@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Data
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CreatePlayerCommand {
 
+    @NotBlank
     private String name;
 
     private LocalDate birthDate;
