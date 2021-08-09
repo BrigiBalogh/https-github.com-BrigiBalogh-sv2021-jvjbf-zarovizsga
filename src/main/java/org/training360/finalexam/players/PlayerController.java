@@ -2,12 +2,14 @@ package org.training360.finalexam.players;
 
 
 import org.junit.jupiter.api.Tag;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/guests")
-@Tag(name = "Operations on guest")
+@RequestMapping("/api/players")
 public class PlayerController {
 
     private final PlayerService playerService;
@@ -16,6 +18,27 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
+
+    @GetMapping
+    public List<PlayerDTO> listPlayers() {
+        return playerService.listPlayers();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public PlayerDTO createPlayer(
+            @Valid @RequestBody CreatePlayerCommand command) {
+
+        return playerService.createPlayer(command);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePlayer(
+            @PathVariable Long id
+    ) {
+        playerService.deleteById(id);
+    }
 
 
 }
